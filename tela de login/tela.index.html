@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>tela de login</title> 
+</head>
+<body>
+   <center><div id="login-form">
+        <div class="character">
+          <div class="eyes">
+            <div class="eye"></div>
+            <div class="eye"></div>
+          </div>
+        </div>
+        <input class="username" type="text" placeholder="username" maxlength="20">
+        <input class="password" type="password" placeholder="password">
+        <button class="button">Clique-me!</button>
+      </div>  </center>
+      
+</body>
+<script>
+    const loginForm = document.querySelector('#login-form')
+const characterEyes = loginForm.querySelector('.eyes')
+const usernameInput = loginForm.querySelector('.username')
+const passwordInput = loginForm.querySelector('.password')
+
+function updateEyeballPosition(value) {
+  if (typeof value !== 'number') {
+    const offset = usernameInput.value.length * (100 / usernameInput.maxLength)
+    value = Math.max(Math.min(offset, 90), 10)
+  }
+
+  characterEyes.style.setProperty('--eye-ball-offset', `${value}%`);
+}
+
+usernameInput.addEventListener('keyup', () => updateEyeballPosition())
+usernameInput.addEventListener('focus', () => updateEyeballPosition())
+usernameInput.addEventListener('blur', () => updateEyeballPosition(50))
+
+passwordInput.addEventListener('focus', () => characterEyes.classList.add('closed'))
+passwordInput.addEventListener('blur', () => characterEyes.classList.remove('closed'))
+</script>
+</html>
